@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decision-Support System</title>
+
+    <!-- Link to CSS -->
+    <link rel="stylesheet" href="CSS/dss.css">
+    <link rel="stylesheet" href="CSS/navbar.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            <img src="Img/agricultural_logo.png" alt="Weather Logo">
+            <span>UzFarmet</span>
+        </div>
+        <ul class="nav-sections">
+            <li><a href="main.html" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-house">
+                <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Main Page</a></li>
+            <li><a href="weather.html" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-cloud-sun-rain">
+                <path d="M12 2v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="M20 12h2"/><path d="m19.07 4.93-1.41 1.41"/><path d="M15.947 12.65a4 4 0 0 0-5.925-4.128"/><path d="M3 20a5 5 0 1 1 8.9-4H13a3 3 0 0 1 2 5.24"/><path d="M11 20v2"/><path d="M7 19v2"/></svg>Weather Forecast</a></li>
+            <li><a href="agriculture.html" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-leaf">
+                <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>Agriculture Forecast</a></li>
+            <li><a href="dss.html" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chart-no-axes-combined">
+                <path d="M12 16v5"/><path d="M16 14v7"/><path d="M20 10v11"/><path d="m22 3-8.646 8.646a.5.5 0 0 1-.708 0L9.354 8.354a.5.5 0 0 0-.707 0L2 15"/><path d="M4 18v3"/><path d="M8 14v7"/></svg>Decision Support</a></li>
+        </ul>
+    </nav>
+
+    <div class="dashboard">
+        <!-- Irrigation -->
+        <div class="card irrigation">
+            <span><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-droplet">
+                <path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"/></svg>Irrigation</span>
+            <div class="irrigation-daily">
+                <ul class="irrigation-cards">
+                    <!-- Forecast items will be dynamically inserted here -->
+                </ul>
+            </div>
+        </div>
+
+        <!-- Irrigation Need -->
+        <div class="card crop-irrigation">
+            <div class="irrigation-header">
+                <span><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-leaf">
+                    <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>Crop Irrigation</span>
+
+                <div class="irrigation-value" id="irrigation-need"></div>
+                    <div class="irrigation-condition">
+                        <span id="irrigation-status"></span>
+                    </div>
+            </div>
+        </div>
+
+        <!-- Seasonal Conditions -->
+        <div class="card seasonal-conditions">
+            <span><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar-check2-icon lucide-calendar-check-2">
+                <path d="M8 2v4"/><path d="M16 2v4"/><path d="M21 14V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h8"/><path d="M3 10h18"/><path d="m16 20 2 2 4-4"/></svg>Seasonal Conditions</span>
+                <div class="peak-seasons">
+                    <h4>Planting Season: <span id="planting-season"></span></h4>
+                    <h4>Harvesting Season: <span id="harvesting-season"></span></h4>
+            </div>
+        </div>
+
+        <!-- Planting -->
+        <div class="card planting">
+            <span><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sprout"><path d="M7 20h10"/><path d="M10 20c5.5-2.5.8-6.4 3-10"/>
+                <path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z"/><path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z"/></svg>Planting</span>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Day</th>
+                            <th>Soil Temp</th>
+                            <th>Soil Mois</th>
+                            <th>Air Temp</th>
+                            <th>Rain</th>
+                            <th>Planting Suitability</th>
+                        </tr>
+                    </thead>
+                    <tbody class="planting-week">
+                        <!-- Forecast items will be dynamically inserted here -->
+                    </tbody>
+                </table>
+        </div>
+
+        <!-- Harvesting -->
+        <div class="card harvesting">
+                <span><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wheat"><path d="M2 22 16 8"/><path d="M3.47 12.53 5 11l1.53 1.53a3.5 3.5 0 0 1 0 4.94L5 19l-1.53-1.53a3.5 3.5 0 0 1 0-4.94Z"/>
+                    <path d="M7.47 8.53 9 7l1.53 1.53a3.5 3.5 0 0 1 0 4.94L9 15l-1.53-1.53a3.5 3.5 0 0 1 0-4.94Z"/><path d="M11.47 4.53 13 3l1.53 1.53a3.5 3.5 0 0 1 0 4.94L13 11l-1.53-1.53a3.5 3.5 0 0 1 0-4.94Z"/><path d="M20 2h2v2a4 4 0 0 1-4 4h-2V6a4 4 0 0 1 4-4Z"/><path d="M11.47 17.47 13 19l-1.53 1.53a3.5 3.5 0 0 1-4.94 0L5 19l1.53-1.53a3.5 3.5 0 0 1 4.94 0Z"/>
+                    <path d="M15.47 13.47 17 15l-1.53 1.53a3.5 3.5 0 0 1-4.94 0L9 15l1.53-1.53a3.5 3.5 0 0 1 4.94 0Z"/><path d="M19.47 9.47 21 11l-1.53 1.53a3.5 3.5 0 0 1-4.94 0L13 11l1.53-1.53a3.5 3.5 0 0 1 4.94 0Z"/></svg>Harvesting</span>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Day</th>
+                                <th>Soil Temp</th>
+                                <th>Soil Mois</th>
+                                <th>Air Temp</th>
+                                <th>Rain</th>
+                                <th>Harvesting Suitability</th>
+                            </tr>
+                        </thead>
+                        <tbody class="harvesting-week">
+                            <!-- Forecast items will be dynamically inserted here -->
+                        </tbody>
+                    </table>
+        </div>
+
+    <!-- Link to JS -->
+    <script src="JS/dss.js"></script>
+    <script src="JS/token_check.js"></script>
+</body>
+</html>

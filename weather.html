@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Link to CSS -->
+    <link rel="stylesheet" href="CSS/weather.css">
+    <link rel="stylesheet" href="CSS/navbar.css">
+
+    <title>Weather Forecast</title>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            <img src="Img/agricultural_logo.png" alt="Weather Logo">
+            <span>UzFarmet</span>
+        </div>
+        <ul class="nav-sections">
+            <li><a href="main.html" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-house">
+                <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Main Page</a></li>
+            <li><a href="weather.html" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-cloud-sun-rain">
+                <path d="M12 2v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="M20 12h2"/><path d="m19.07 4.93-1.41 1.41"/><path d="M15.947 12.65a4 4 0 0 0-5.925-4.128"/><path d="M3 20a5 5 0 1 1 8.9-4H13a3 3 0 0 1 2 5.24"/><path d="M11 20v2"/><path d="M7 19v2"/></svg>Weather Forecast</a></li>
+            <li><a href="agriculture.html" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-leaf">
+                <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>Agriculture Forecast</a></li>
+            <li><a href="dss.html" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chart-no-axes-combined">
+                <path d="M12 16v5"/><path d="M16 14v7"/><path d="M20 10v11"/><path d="m22 3-8.646 8.646a.5.5 0 0 1-.708 0L9.354 8.354a.5.5 0 0 0-.707 0L2 15"/><path d="M4 18v3"/><path d="M8 14v7"/></svg>Decision Support</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main UI -->
+    <div class="dashboard">
+
+        <!-- Main Weather -->
+        <div class="card main-weather">
+            <div class="weather-header">
+                <span class="day" id="current-date">Today (Dec 9)</span>
+                    <span class="time" id="current-time">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-clock-12">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <path d="M3 12a9 9 0 0 0 9 9m9 -9a9 9 0 1 0 -18 0"/>
+                            <path d="M12 7v5l.5 .5"/>
+                            <path d="M18 15h2a1 1 0 0 1 1 1v1a1 1 0 0 1 -1 1h-1a1 1 0 0 0 -1 1v1a1 1 0 0 0 1 1h2"/>
+                            <path d="M15 21v-6"/>
+                        </svg>11:45 AM
+                    </span>
+            </div>
+            
+            <span class="location" id="current-location"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin">
+                <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg> Tashkent
+            </span>
+
+            <div class="icon">
+                <img id="weather-img" src="https://openweathermap.org/img/wn/10d@4x.png" alt="weather-icon">
+            </div>
+            <div class="current-info">
+                <span class="condition" id="weather-condition"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun">
+                    <circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/>
+                    <path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>Day-time | Rain</span>
+                <span class="temp" id="temp"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-thermometer">
+                    <path d="M14 4v10.54a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0Z"/></svg>Low: 4°C | High: 8°C</span>
+                <span class="humidity" id="humidity"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-droplets">
+                    <path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z"/>
+                    <path d="M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97"/></svg>Humidity: 62%</span>
+            </div>
+        </div>
+    
+        <!-- Sunrise & Sunset -->
+        <div class="card sunrise-sunset">
+            <div class="sun-header">
+                <span><svg xmlns="http://www.w3.org/2000/svg"  width="22"  height="22"  viewBox="0 0 22 26"  fill="currentColor"  class="icon icon-tabler icons-tabler-filled icon-tabler-sunrise"><path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                    <path d="M4 16a1 1 0 0 1 0 2h-1a1 1 0 0 1 0 -2z" /><path d="M12 12a5 5 0 0 1 5 5a1 1 0 0 1 -1 1h-8a1 1 0 0 1 -1 -1a5 5 0 0 1 5 -5" /><path d="M21 16a1 1 0 0 1 0 2h-1a1 1 0 0 1 0 -2z" />
+                    <path d="M6.307 9.893l.7 .7a1 1 0 0 1 -1.414 1.414l-.7 -.7a1 1 0 0 1 1.414 -1.414" /><path d="M19.107 9.893a1 1 0 0 1 0 1.414l-.7 .7a1 1 0 0 1 -1.414 -1.414l.7 -.7a1 1 0 0 1 1.414 0" />
+                    <path d="M12.707 2.293l3 3a1 1 0 1 1 -1.414 1.414l-1.293 -1.292v3.585a1 1 0 0 1 -.883 .993l-.117 .007a1 1 0 0 1 -1 -1v-3.586l-1.293 1.293a1 1 0 0 1 -1.414 -1.414l2.958 -2.96a1 1 0 0 1 .15 -.135l.127 -.08l.068 -.033l.11 -.041l.12 -.029c.3 -.055 .627 .024 .881 .278" />
+                    <path d="M3 20h18a1 1 0 0 1 0 2h-18a1 1 0 0 1 0 -2" /><path d="M12 12a5 5 0 0 1 4.583 7.002h-9.166a5 5 0 0 1 4.583 -7.002" /></svg>Sunrise
+                </span>
+
+                <span><svg xmlns="http://www.w3.org/2000/svg"  width="22"  height="22"  viewBox="0 0 22 26"  fill="currentColor"  class="icon icon-tabler icons-tabler-filled icon-tabler-sunset"><path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                    <path d="M4 16a1 1 0 0 1 0 2h-1a1 1 0 0 1 0 -2z" /><path d="M21 16a1 1 0 0 1 0 2h-1a1 1 0 0 1 0 -2z" /><path d="M6.307 9.893l.7 .7a1 1 0 0 1 -1.414 1.414l-.7 -.7a1 1 0 0 1 1.414 -1.414" />
+                    <path d="M19.107 9.893a1 1 0 0 1 0 1.414l-.7 .7a1 1 0 0 1 -1.414 -1.414l.7 -.7a1 1 0 0 1 1.414 0" />
+                    <path d="M12 2a1 1 0 0 1 1 1v3.584l1.293 -1.291a1 1 0 0 1 1.32 -.083l.094 .083a1 1 0 0 1 0 1.414l-3 3a.98 .98 0 0 1 -.767 .293l-.124 -.017l-.127 -.032l-.104 -.04l-.115 -.063a1 1 0 0 1 -.151 -.114l-3.026 -3.027a1 1 0 0 1 1.414 -1.414l1.293 1.292v-3.585a1 1 0 0 1 1 -1" />
+                    <path d="M3 20h18a1 1 0 0 1 0 2h-18a1 1 0 0 1 0 -2" /><path d="M12 12a5 5 0 0 1 4.583 7.002h-9.166a5 5 0 0 1 4.583 -7.002" /></svg>Sunset
+                </span>
+            </div>
+            
+            <div class="path">
+                <div class="progress-bar"></div>
+                <div class="sun-indicator"></div>
+                <div class="moon-indicator"></div>
+            </div>
+    
+            <div class="info">
+                <span class="sunrise-time" id="sunrise-time"></span>
+                <span class="sunset-time" id="sunset-time"></span>
+            </div>
+        </div>
+    
+        <!-- 24-Hour Weather -->
+        <div class="card hourly-weather">
+            <span><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar-clock">
+                <path d="M21 7.5V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3.5"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h5"/><path d="M17.5 17.5 16 16.3V14"/><circle cx="16" cy="16" r="6"/></svg> 12-Hour Forecast</span>
+            <div class="hourly">
+                <ul class="hourly-cards">
+                    <!-- Forecast items will be dynamically inserted here -->
+                </ul>
+            </div>
+        </div>
+
+        <!-- 7-Day Weather -->
+        <div class="card daily-weather">
+            <span><svg  xmlns="http://www.w3.org/2000/svg"  width="22"  height="22"  viewBox="0 0 22 26"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-calendar-week">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z" />
+                <path d="M16 3v4" /><path d="M8 3v4" /><path d="M4 11h16" /><path d="M7 14h.013" /><path d="M10.01 14h.005" /><path d="M13.01 14h.005" />
+                <path d="M16.015 14h.005" /><path d="M13.015 17h.005" /><path d="M7.01 17h.005" /><path d="M10.01 17h.005" /></svg>7-Day Forecast</span>
+            <div class="daily">
+                <ul class="daily-cards">
+                    <!-- Forecast items will be dynamically inserted here -->
+                </ul>
+            </div>
+        </div>
+    
+        <!-- Wind Speed -->
+        <div class="card wind">
+            <div class="wind-header">
+                <span><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wind">
+                    <path d="M12.8 19.6A2 2 0 1 0 14 16H2"/><path d="M17.5 8a2.5 2.5 0 1 1 2 4H2"/><path d="M9.8 4.4A2 2 0 1 1 11 8H2"/></svg> Wind Speed</span>
+            </div>
+
+                <div class="compass-container">
+                    <div class="arrow-wrapper">
+                        <img src="Img/compass_arrow.svg" class="compass-arrow" />
+                    </div>
+                    <img src="Img/compass_body.svg" alt="Compass Body" class="compass-body">
+                    <span class="compass-text" id="wind-speed">6 km/h</span>
+                </div>
+        </div>
+    
+        <!-- Air Pressure -->
+        <div class="card pressure">
+            <div class="pressure-header">
+                <span><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-gauge">
+                    <path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg> Air Pressure</span>
+
+                <div class="pressure-value" id="air-pressure">1033 hPa</div>
+                    <div class="pressure-condition">
+                        <span id="pressure-status">High pressure. Expect weather changes!</span>
+                    </div>
+            </div>
+        </div>
+    
+        <!-- Precipitation -->
+        <div class="card precipitation">
+            <div class="precipitation-header">
+                <span><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-cloud-rain-wind">
+                    <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"/><path d="m9.2 22 3-7"/><path d="m9 13-3 7"/><path d="m17 13-3 7"/></svg> Precipitation</span>
+                
+                <div class="precipitation-value" id="precipitation">25%</div>
+                    <div class="precipitation-condition">
+                        <span id="precipitation-status">Low precipitation. Expect weather changes!</span>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Link to JS -->
+    <script src="JS/weather.js"></script>
+    <script src="JS/token_check.js"></script>
+</body>
+</html>

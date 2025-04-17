@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+
+    <!-- Link to CSS -->
+    <link rel="stylesheet" href="CSS/main.css">
+    <link rel="stylesheet" href="CSS/navbar.css">
+
+    <script>
+        // Authentication check
+        document.addEventListener("DOMContentLoaded", async () => {
+            const token = sessionStorage.getItem("token");
+            if (!token) {
+                window.location.href = "index.html"; // Redirect to login if not authenticated
+                return;
+            }
+
+            try {
+                const response = await fetch("http://localhost:5000/profile", {
+                    method: "GET",
+                    headers: { Authorization: token }, // Send token for authentication
+                });
+
+                const data = await response.json();
+                if (!response.ok) throw new Error(data.message);
+
+                document.getElementById("full-name").value = `${data.first_name} ${data.last_name}`;
+                document.getElementById("email").value = data.email;
+                document.getElementById("password").value = "********";
+            } catch (error) {
+                alert(error.message);
+                sessionStorage.removeItem("token");
+                window.location.href = "index.html"; // Redirect to login if token is invalid
+            }
+        });
+    </script>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            <img src="Img/agricultural_logo.png" alt="Weather Logo">
+            <span>UzFarmet</span>
+        </div>
+        <ul class="nav-sections">
+            <li><a href="main.html" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-house">
+                <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Main Page</a></li>
+            <li><a href="weather.html" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-cloud-sun-rain">
+                <path d="M12 2v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="M20 12h2"/><path d="m19.07 4.93-1.41 1.41"/><path d="M15.947 12.65a4 4 0 0 0-5.925-4.128"/><path d="M3 20a5 5 0 1 1 8.9-4H13a3 3 0 0 1 2 5.24"/><path d="M11 20v2"/><path d="M7 19v2"/></svg>Weather Forecast</a></li>
+            <li><a href="agriculture.html" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-leaf">
+                <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>Agriculture Forecast</a></li>
+            <li><a href="dss.html" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chart-no-axes-combined">
+                <path d="M12 16v5"/><path d="M16 14v7"/><path d="M20 10v11"/><path d="m22 3-8.646 8.646a.5.5 0 0 1-.708 0L9.354 8.354a.5.5 0 0 0-.707 0L2 15"/><path d="M4 18v3"/><path d="M8 14v7"/></svg>Decision Support</a></li>
+        </ul>
+    </nav>
+
+    <div class="dashboard">
+        <!-- Profile -->
+        <div class="card profile">
+            <h2 class="profile-header">
+                <!-- Info Button -->
+                <div class="info-container">
+                    <button class="info" id="info-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-info">
+                            <circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>Info
+                    </button>
+                </div>
+
+                <!-- Settings Button -->
+                <div class="settings-container">
+                    <button class="settings" id="settings-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu">
+                            <line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>Settings
+                    </button>
+
+                    <!-- Dropdown Menu -->
+                    <div class="dropdown-content" id="settings-dropdown">
+                        <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-key">
+                            <path d="m15.5 7.5 2.3 2.3a1 1 0 0 0 1.4 0l2.1-2.1a1 1 0 0 0 0-1.4L19 4"/><path d="m21 2-9.6 9.6"/><circle cx="7.5" cy="15.5" r="5.5"/></svg>Change Password</a>
+                        <a id="delete-account"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-2">
+                            <path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>Delete Account</a>
+                        <a id="sign-off"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-out">
+                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg>Sign Off</a>
+                    </div>
+                </div>
+            </h2>
+
+            <div class="profile-container">
+                <div class="profile-circle"></div>
+                <div class="profile-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-round-pen">
+                    <path d="M2 21a8 8 0 0 1 10.821-7.487"/><path d="M21.378 16.626a1 1 0 0 0-3.004-3.004l-4.01 4.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z"/><circle cx="10" cy="8" r="5"/></svg>
+                </div>
+
+                <div class="profile-card">
+                    <h3>User Profile:</h3>
+                    <div class="user-credentials">
+                        <div class="credentials-group">
+                            <label for="full-name">Full name:</label>
+                            <input type="text" id="full-name" placeholder="" readonly>
+                        </div>
+
+                        <div class="credentials-group">
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" placeholder="" readonly>
+                        </div>
+
+                        <div class="credentials-group">
+                            <label for="password">Password:</label>
+                            <input type="password" id="password" placeholder="" readonly>
+                        </div>
+
+                        <div class="credentials-group">
+                            <label for="location">Location:</label>
+                            <select id="region-select">
+                                <option value="Tashkent">Tashkent</option>
+                                <option value="Andijan">Andijan</option>
+                                <option value="Bukhara">Bukhara</option>
+                                <option value="Fergana">Fergana</option>
+                                <option value="Jizzakh">Jizzakh</option>
+                                <option value="Namangan">Namangan</option>
+                                <option value="Navoi">Navoi</option>
+                                <option value="Kashkadarya">Kashkadarya</option>
+                                <option value="Samarkand">Samarkand</option>
+                                <option value="Sirdarya">Sirdarya</option>
+                                <option value="Surkhandarya">Surkhandarya</option>
+                                <option value="Khorezm">Khorezm</option>
+                                <option value="Karakalpakstan">Karakalpakstan</option>
+                            </select>
+                        </div>
+
+                        <div class="credentials-group">
+                            <label for="crop-type">Crop type:</label>
+                            <select id="crop-select">
+                                <!-- Overall Crops -->
+                                <option value="cotton">Cotton</option>
+                                <option value="wheat">Wheat</option>
+                                <option value="rice">Rice</option>
+
+                                <!-- Fruits -->
+                                <option value="apple">Apple</option>
+                                <option value="apricot">Apricot</option>
+                                <option value="grapes">Grapes</option>
+                                <option value="watermelon">Watermelon</option>
+
+                                <!-- Vegetables -->
+                                <option value="potato">Potato</option>
+                                <option value="tomato">Tomato</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Subscription -->
+        <div class="card subscription">
+            <div class="subscription-status">
+                <span><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-round-check">
+                    <path d="M2 21a8 8 0 0 1 13.292-6"/><circle cx="10" cy="8" r="5"/><path d="m16 19 2 2 4-4"/></svg>Subscription Status</span>
+            </div>
+            
+            <!-- Subscription Cards -->
+            <div class="subscription-container">
+                <div class="subscription-cards">
+                    <h3>Amateur</h3>
+                    <span><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-hand-coins">
+                        <path d="M11 15h2a2 2 0 1 0 0-4h-3c-.6 0-1.1.2-1.4.6L3 17"/><path d="m7 21 1.6-1.4c.3-.4.8-.6 1.4-.6h4c1.1 0 2.1-.4 2.8-1.2l4.6-4.4a2 2 0 0 0-2.75-2.91l-4.2 3.9"/>
+                        <path d="m2 16 6 6"/><circle cx="16" cy="9" r="2.9"/><circle cx="6" cy="5" r="3"/></svg>0$ / no limit</span>
+                    <span>Package highlights:</span>
+                    <ul>
+                        <li>7 days ahead forecast</li>
+                        <li>12 hours ahead forecast</li>
+                        <li>No SMS-based weather alerts</li>
+                        <li>Weather data updates few times a day</li>
+                        <li>Include ads & sponsored content</li>
+                    </ul>
+                </div>
+    
+                <div class="subscription-cards">
+                    <h3>Specialist</h3>
+                    <span><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-hand-coins">
+                        <path d="M11 15h2a2 2 0 1 0 0-4h-3c-.6 0-1.1.2-1.4.6L3 17"/><path d="m7 21 1.6-1.4c.3-.4.8-.6 1.4-.6h4c1.1 0 2.1-.4 2.8-1.2l4.6-4.4a2 2 0 0 0-2.75-2.91l-4.2 3.9"/>
+                        <path d="m2 16 6 6"/><circle cx="16" cy="9" r="2.9"/><circle cx="6" cy="5" r="3"/></svg>1$ / month</span>
+                    <span>Package highlights:</span>
+                    <ul>
+                        <li>14 days ahead forecast</li>
+                        <li>48 hours ahead forecast</li>
+                        <li>SMS-based weather alerts</li>
+                        <li>Weather data updates every hour</li>
+                        <li>No ads & sponsored content</li>
+                    </ul>
+                    <button class="subscribe-btn"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevrons-up">
+                        <path d="m17 11-5-5-5 5"/><path d="m17 18-5-5-5 5"/></svg>Subscribe</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Customization -->
+        <div class="card customization">
+            <div class="customization-container">
+                <div class="customization-item">
+                    <span><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-languages">
+                        <path d="m5 8 6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="m22 22-5-10-5 10"/><path d="M14 18h6"/></svg>Language Selection:</span>
+                    <div class="language-selector" id="language-selector">
+                        <label class="label-style"><input type="checkbox" name="language" value="english"> English</label>
+                        <label class="label-style"><input type="checkbox" name="language" value="uzbek"> Uzbek</label>
+                        <label class="label-style"><input type="checkbox" name="language" value="russian"> Russian</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Link to JS -->
+    <script src="JS/main.js"></script>
+</body>
+</html>
